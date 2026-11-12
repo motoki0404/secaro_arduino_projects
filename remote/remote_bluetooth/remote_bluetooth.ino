@@ -17,8 +17,16 @@ const int centerDutyHigh = 313;  // 停止範囲の上限
 const int centerDutyLow = 290;   // 停止範囲の下限
 const int step = 10;             // デューティの刻み幅
 
+//左右差をなくすデューティ比
+//前進
+const int forwardL = 57;
+const int forwardR = 50;
+//後進
+const int backwardL = 50;
+const int backwardR = 50;
+
 // Bluetooth通信用
-const char* DEVICE_NAME = "Secaro";
+const char* DEVICE_NAME = "Secaro_motoki";
 BluetoothSerial SerialBT;
 
 // 走行指令用
@@ -89,8 +97,8 @@ void loop() {
 
   if (command == 'F') {
     // 前進
-    ledcWrite(PIN_1, centerDutyHigh + step*spdL);
-    ledcWrite(PIN_2, centerDutyLow - step*spdR);
+    ledcWrite(PIN_1, centerDutyHigh + forwardL*spdL);
+    ledcWrite(PIN_2, centerDutyLow - forwardR*spdR);
   } else if (command == 'B') {
     // 後退
     ledcWrite(PIN_1, centerDutyLow - step*spdL);

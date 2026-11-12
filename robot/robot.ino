@@ -14,6 +14,14 @@ const int RESOLUTION = 12;     // 12ビットの分解能（4096段階）
 const int centerDuty = (int)(4096 * 1.5 / 20.0); // 1.5ms に相当する duty（約307） → 停止
 const int step = 50;         // デューティの刻み幅
 
+//左右差をなくすデューティ比
+//前進
+const int forwardL = 57;
+const int forwardR = 50;
+//後進
+const int backwardL = 50;
+const int backwardR = 50;
+
 // 実行フラグ
 bool run = true;
 
@@ -38,8 +46,8 @@ void setup() {
 void loop() {
   if(run == true) {
     // 前進
-    ledcWrite(PIN_1, centerDuty + step);
-    ledcWrite(PIN_2, centerDuty - step);
+    ledcWrite(PIN_1, centerDuty + forwardL);
+    ledcWrite(PIN_2, centerDuty - forwardR);
     delay(2000);
 
     // 後退
